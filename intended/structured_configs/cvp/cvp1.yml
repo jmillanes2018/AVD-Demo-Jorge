@@ -1,0 +1,41 @@
+---
+cvp_devices:
+  - fqdn: CAGEA-BORDER-1A
+    parentContainerName: LEAFS
+    configlets:
+      - AVD_CAGEA-BORDER-1A
+  - fqdn: CAGEA-BORDER-1B
+    parentContainerName: LEAFS
+    configlets:
+      - AVD_CAGEA-BORDER-1B
+  - fqdn: CAGEA-LEAF-1A
+    parentContainerName: LEAFS
+    configlets:
+      - AVD_CAGEA-LEAF-1A
+  - fqdn: CAGEA-LEAF-1B
+    parentContainerName: LEAFS
+    configlets:
+      - AVD_CAGEA-LEAF-1B
+  - fqdn: CAGEA-LEAF-2A
+    parentContainerName: LEAFS
+    configlets:
+      - AVD_CAGEA-LEAF-2A
+  - fqdn: CAGEA-LEAF-2B
+    parentContainerName: LEAFS
+    configlets:
+      - AVD_CAGEA-LEAF-2B
+  - fqdn: CAGEA-SPINE1
+    parentContainerName: SPINES
+    configlets:
+      - AVD_CAGEA-SPINE1
+  - fqdn: CAGEA-SPINE2
+    parentContainerName: SPINES
+    configlets:
+      - AVD_CAGEA-SPINE2
+cvp_containers:
+  FABRIC:
+    parentContainerName: Tenant
+  LEAFS:
+    parentContainerName: FABRIC
+  SPINES:
+    parentContainerName: FABRIC
