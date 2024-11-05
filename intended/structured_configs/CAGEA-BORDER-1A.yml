@@ -146,6 +146,14 @@ router_bgp:
       - 10056:10056
     redistribute_routes:
     - learned
+  - id: 57
+    tenant: JORGE
+    rd: 172.17.8.5:10057
+    route_targets:
+      both:
+      - 10057:10057
+    redistribute_routes:
+    - learned
 service_routing_protocols_model: multi-agent
 ip_routing: true
 daemon_terminattr:
@@ -227,6 +235,9 @@ vlans:
   tenant: JORGE
 - id: 56
   name: VLAN56
+  tenant: JORGE
+- id: 57
+  name: VLAN57
   tenant: JORGE
 vlan_interfaces:
 - name: Vlan4093
@@ -414,6 +425,8 @@ vxlan_interface:
         vni: 10055
       - id: 56
         vni: 10056
+      - id: 57
+        vni: 10057
       vrfs:
       - name: vr-3030
         vni: 30

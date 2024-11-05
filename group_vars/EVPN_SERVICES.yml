@@ -9,6 +9,10 @@ tenants:
         name: VLAN55
       - id: 56
         name: VLAN56
+      - id: 57
+        name: VLAN57
+      - id: 58
+        name: VLAN58
 
     vrfs:
       - name: vr-3030
@@ -36,14 +40,3 @@ tenants:
         static_routes:
           - destination_address_prefix: 0.0.0.0/0
             gateway: 172.30.40.254      
-
-
-      #  l3_interfaces:
-       #   - interfaces:[Ethernet47]
-        #    ip_addresses:[192.168.100.1/24]
-         #   nodes:[CAGEA-BORDER-1A]
-          #  enabled:True 
-       # bgp_peers:
-        #  - ip_address: [192.168.100.2]
-         #   remote_as: 1
-          #  nodes: [CAGEA-BORDER-1A]

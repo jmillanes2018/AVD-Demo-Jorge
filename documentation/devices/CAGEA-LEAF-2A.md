@@ -207,6 +207,7 @@ vlan internal order ascending range 1006 1199
 | ------- | ---- | ------------ |
 | 55 | VLAN55 | - |
 | 56 | VLAN56 | - |
+| 57 | VLAN57 | - |
 | 3029 | MLAG_iBGP_vr-3030 | LEAF_PEER_L3 |
 | 3030 | vlan3030 | - |
 | 3039 | MLAG_iBGP_vr-4040 | LEAF_PEER_L3 |
@@ -223,6 +224,9 @@ vlan 55
 !
 vlan 56
    name VLAN56
+!
+vlan 57
+   name VLAN57
 !
 vlan 3029
    name MLAG_iBGP_vr-3030
@@ -454,6 +458,7 @@ interface Vlan4094
 | ---- | --- | ---------- | --------------- |
 | 55 | 10055 | - | - |
 | 56 | 10056 | - | - |
+| 57 | 10057 | - | - |
 | 3030 | 13030 | - | - |
 | 3040 | 13040 | - | - |
 
@@ -475,6 +480,7 @@ interface Vxlan1
    vxlan udp-port 4789
    vxlan vlan 55 vni 10055
    vxlan vlan 56 vni 10056
+   vxlan vlan 57 vni 10057
    vxlan vlan 3030 vni 13030
    vxlan vlan 3040 vni 13040
    vxlan vrf vr-3030 vni 30
@@ -630,6 +636,7 @@ ASN Notation: asplain
 | ---- | ------------------- | ----------------- | ------------------- | ------------------- | ------------ |
 | 55 | 172.17.8.3:10055 | 10055:10055 | - | - | learned |
 | 56 | 172.17.8.3:10056 | 10056:10056 | - | - | learned |
+| 57 | 172.17.8.3:10057 | 10057:10057 | - | - | learned |
 | 3030 | 172.17.8.3:13030 | 13030:13030 | - | - | learned |
 | 3040 | 172.17.8.3:13040 | 13040:13040 | - | - | learned |
 
@@ -702,6 +709,11 @@ router bgp 64515
    vlan 56
       rd 172.17.8.3:10056
       route-target both 10056:10056
+      redistribute learned
+   !
+   vlan 57
+      rd 172.17.8.3:10057
+      route-target both 10057:10057
       redistribute learned
    !
    address-family evpn

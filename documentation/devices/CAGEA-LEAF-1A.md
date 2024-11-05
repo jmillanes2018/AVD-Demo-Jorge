@@ -207,6 +207,7 @@ vlan internal order ascending range 1006 1199
 | ------- | ---- | ------------ |
 | 55 | VLAN55 | - |
 | 56 | VLAN56 | - |
+| 57 | VLAN57 | - |
 | 3029 | MLAG_iBGP_vr-3030 | LEAF_PEER_L3 |
 | 3030 | vlan3030 | - |
 | 3039 | MLAG_iBGP_vr-4040 | LEAF_PEER_L3 |
@@ -223,6 +224,9 @@ vlan 55
 !
 vlan 56
    name VLAN56
+!
+vlan 57
+   name VLAN57
 !
 vlan 3029
    name MLAG_iBGP_vr-3030
@@ -257,7 +261,7 @@ vlan 4094
 
 | Interface | Description | Mode | VLANs | Native VLAN | Trunk Group | Channel-Group |
 | --------- | ----------- | ---- | ----- | ----------- | ----------- | ------------- |
-| Ethernet1 | - | *trunk | *3030, 3040, 55, 56 | *- | *- | 1 |
+| Ethernet1 | - | *trunk | *3030, 3040, 55, 56, 57 | *- | *- | 1 |
 | Ethernet55/1 | MLAG_PEER_CAGEA-LEAF-1B_Ethernet55/1 | *trunk | *- | *- | *['LEAF_PEER_L3', 'MLAG'] | 551 |
 | Ethernet56/1 | MLAG_PEER_CAGEA-LEAF-1B_Ethernet56/1 | *trunk | *- | *- | *['LEAF_PEER_L3', 'MLAG'] | 551 |
 
@@ -311,7 +315,7 @@ interface Ethernet56/1
 
 | Interface | Description | Type | Mode | VLANs | Native VLAN | Trunk Group | LACP Fallback Timeout | LACP Fallback Mode | MLAG ID | EVPN ESI |
 | --------- | ----------- | ---- | ---- | ----- | ----------- | ------------| --------------------- | ------------------ | ------- | -------- |
-| Port-Channel1 | - | switched | trunk | 3030, 3040, 55, 56 | - | - | - | - | 1 | - |
+| Port-Channel1 | - | switched | trunk | 3030, 3040, 55, 56, 57 | - | - | - | - | 1 | - |
 | Port-Channel551 | MLAG_PEER_CAGEA-LEAF-1B_Po551 | switched | trunk | - | - | ['LEAF_PEER_L3', 'MLAG'] | - | - | - | - |
 
 #### Port-Channel Interfaces Device Configuration
@@ -321,7 +325,7 @@ interface Ethernet56/1
 interface Port-Channel1
    no shutdown
    switchport
-   switchport trunk allowed vlan 3030, 3040, 55, 56
+   switchport trunk allowed vlan 3030, 3040, 55, 56, 57
    switchport mode trunk
    mlag 1
    spanning-tree portfast
@@ -452,6 +456,7 @@ interface Vlan4094
 | ---- | --- | ---------- | --------------- |
 | 55 | 10055 | - | - |
 | 56 | 10056 | - | - |
+| 57 | 10057 | - | - |
 | 3030 | 13030 | - | - |
 | 3040 | 13040 | - | - |
 
@@ -473,6 +478,7 @@ interface Vxlan1
    vxlan udp-port 4789
    vxlan vlan 55 vni 10055
    vxlan vlan 56 vni 10056
+   vxlan vlan 57 vni 10057
    vxlan vlan 3030 vni 13030
    vxlan vlan 3040 vni 13040
    vxlan vrf vr-3030 vni 30
@@ -628,6 +634,7 @@ ASN Notation: asplain
 | ---- | ------------------- | ----------------- | ------------------- | ------------------- | ------------ |
 | 55 | 172.17.8.1:10055 | 10055:10055 | - | - | learned |
 | 56 | 172.17.8.1:10056 | 10056:10056 | - | - | learned |
+| 57 | 172.17.8.1:10057 | 10057:10057 | - | - | learned |
 | 3030 | 172.17.8.1:13030 | 13030:13030 | - | - | learned |
 | 3040 | 172.17.8.1:13040 | 13040:13040 | - | - | learned |
 
@@ -700,6 +707,11 @@ router bgp 64513
    vlan 56
       rd 172.17.8.1:10056
       route-target both 10056:10056
+      redistribute learned
+   !
+   vlan 57
+      rd 172.17.8.1:10057
+      route-target both 10057:10057
       redistribute learned
    !
    address-family evpn

@@ -2,7 +2,7 @@
 port_profiles:
   - profile: ESXi
     mode: trunk
-    vlans: 3030, 3040, 55, 56
+    vlans: 3030, 3040, 55, 56, 57, 58
     spanning_tree_portfast: edge
     port_channel:
       mode: active
